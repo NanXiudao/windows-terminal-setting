@@ -8,6 +8,20 @@ winget install JanDeDobbeleer.OhMyPosh -s winget
 
 Install-Module -Name Terminal-Icons -Repository PSGallery -Scope CurrentUser
 ```
+
+压制pwsh版本和耗时统计
+
+setting.json
+```json
+            {
+                "commandline": "G:\\pwsh\\7\\pwsh.exe -NoLogo -NoProfileLoadTime",
+                "elevate": true,
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "PowerShell"
+            },
+```
+
 编辑配置
 ```pwsh
 notepad $PROFILE
