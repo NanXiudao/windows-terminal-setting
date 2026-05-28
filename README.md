@@ -3,4 +3,115 @@ My private windows terminal setting
 
 ```pwsh
 Install-Module -Name PSReadLine -Force -SkipPublisherCheck
+
+winget install JanDeDobbeleer.OhMyPosh -s winget
+
+Install-Module -Name Terminal-Icons -Repository PSGallery -Scope CurrentUser
+```
+编辑配置
+```pwsh
+notepad $PROFILE
+```
+更改默认oh-my-posh主题
+
+```pwsh
+mkdir "$HOME\.config\oh-my-posh" -Force
+
+oh-my-posh config export `
+  --config catppuccin_macchiato `
+  --output "$HOME\.config\oh-my-posh\catppuccin_macchiato.omp.json"
+
+notepad "$HOME\.config\oh-my-posh\catppuccin_macchiato.omp.json"
+```
+更改omp模板
+```text
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palette": {
+    "blue": "#8AADF4",
+    "closer": "p:os",
+    "lavender": "#B7BDF8",
+    "os": "#ACB0BE",
+    "pink": "#F5BDE6"
+  },
+  "upgrade": {
+    "source": "cdn",
+    "interval": "168h",
+    "auto": false,
+    "notice": false
+  },
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "template": " ",
+          "foreground": "p:blue",
+          "type": "text",
+          "style": "plain"
+        },
+        {
+          "template": "{{ .UserName }} ",
+          "foreground": "p:blue",
+          "type": "session",
+          "style": "plain"
+        },
+        {
+          "options": {
+            "folder_icon": "..\ue5fe..",
+            "home_icon": "~",
+            "style": "agnoster_short"
+          },
+          "template": "{{ .Path }} ",
+          "foreground": "p:pink",
+          "type": "path",
+          "style": "plain"
+        },
+        {
+          "options": {
+            "branch_icon": "\ue725 ",
+            "cherry_pick_icon": "\ue29b ",
+            "commit_icon": "\uf417 ",
+            "fetch_status": false,
+            "fetch_upstream_icon": false,
+            "merge_icon": "\ue727 ",
+            "no_commits_icon": "\uf0c3 ",
+            "rebase_icon": "\ue728 ",
+            "revert_icon": "\uf0e2 ",
+            "tag_icon": "\uf412 "
+          },
+          "template": "{{ .HEAD }} ",
+          "foreground": "p:lavender",
+          "type": "git",
+          "style": "plain"
+        },
+        {
+          "template": "\uf105",
+          "foreground": "p:closer",
+          "type": "text",
+          "style": "plain"
+        }
+      ]
+    }
+  ],
+  "version": 4,
+  "final_space": true
+}
+
+```
+$PROFILE写入
+
+```
+oh-my-posh init pwsh --config "$HOME\.config\oh-my-posh\catppuccin_macchiato.omp.json" | Invoke-Expression
+
+Import-Module Terminal-Icons
+```
+刷新配置
+```pwsh
+. $PROFILE
+```
+安装字体
+```pwsh
+oh-my-posh font install
 ```
