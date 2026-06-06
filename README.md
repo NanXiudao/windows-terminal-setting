@@ -66,6 +66,16 @@ notepad "$HOME\.config\oh-my-posh\catppuccin_macchiato.omp.json"
           "style": "plain"
         },
         {
+          "type": "python",
+          "style": "plain",
+          "foreground": "p:lavender",
+          "template": "{{ if .Venv }}[{{ .Venv }}] {{ end }}",
+          "options": {
+            "fetch_virtual_env": true,
+            "display_mode": "environment"
+          }
+        },
+        {
           "template": "{{ .UserName }} ",
           "foreground": "p:blue",
           "type": "session",
@@ -112,6 +122,7 @@ notepad "$HOME\.config\oh-my-posh\catppuccin_macchiato.omp.json"
   "version": 4,
   "final_space": true
 }
+
 
 ```
 $PROFILE写入
